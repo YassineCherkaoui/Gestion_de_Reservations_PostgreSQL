@@ -42,3 +42,16 @@ INSERT INTO reservations VALUES (1, 'AD123', 1, '2021-04-01', '2021-04-30');
 INSERT INTO reservations VALUES (2, 'AD123', 2, '2021-05-01', '2021-05-30');
 INSERT INTO reservations VALUES (3, 'AD123', 3, '2021-06-01', '2021-06-30');
 INSERT INTO reservations VALUES (4, 'AD123', 4, '2021-07-01', '2021-07-30');
+
+//une fonction qui affiche les client qui ont reservé les chambres quit coûtent plus de 700 dhs
+
+CREATE FUNCTION afficherClts() RETURNS void
+LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+   SELECT * FROM CLIENTS cl 
+      INNER JOIN reservations r on (cl.numPass  = r.numPass)  
+      INNER JOIN chambres ch on (ch.numC = r.numC )
+      WHERE (prix>700);
+END
+$$;
