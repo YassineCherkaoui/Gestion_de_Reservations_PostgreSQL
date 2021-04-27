@@ -1,0 +1,44 @@
+ //Create tables : 
+
+ CREATE TABLE CLIENTS (
+     	numPass VARCHAR(20) PRIMARY KEY, 
+ 	nom VARCHAR(15) NOT NULL,
+ 	ville VARCHAR(15) NOT NULL
+ );
+
+ CREATE TABLE CHAMBRES(
+         numC NUMERIC(20) PRIMARY KEY, 
+         lits NUMERIC(15) NOT NULL DEFAULT 2,
+         prix NUMERIC(15) NOT NULL
+);
+
+ CREATE TABLE RESERVATIONS(
+      	numR NUMERIC(20) PRIMARY KEY, 
+	numPass VARCHAR(20),
+       	numC NUMERIC(20) NOT NULL,
+       	arrivée date NOT NULL,
+       	départ date
+      CONSTRAINT fk_RESERVATIONS FOREIGN KEY(numPass) REFERENCES CLIENTS(numPass) ON DELETE CASCADE ON UPDATE CASCADE,
+      CONSTRAINT fk_CHAMBRES FOREIGN KEY(numC) REFERENCES CHAMBRES(numC) ON DELETE CASCADE ON UPDATE CASCADE
+
+ );
+
+//Insert table
+INSERT INTO clients VALUES('AD123', 'Yassine cherkaoui', 'Agadir');
+INSERT INTO clients VALUES('AD321', 'Hassan', 'agadir');
+INSERT INTO clients VALUES('AD342', 'Mehdi', 'Agadir')
+
+// insert CHAMBRES
+INSERT INTO chambres VALUES (1,1,2Z0);
+INSERT INTO chambres VALUES (2,2,430);
+INSERT INTO chambres VALUES (3,3,820);
+INSERT INTO chambres VALUES (4,4,110);
+INSERT INTO chambres VALUES (5,5,1100);
+INSERT INTO chambres VALUES (6,6,1100);
+
+//RESERVATIONS
+
+INSERT INTO reservations VALUES (1, 'AD123', 1, '2021-04-01', '2021-04-30');
+INSERT INTO reservations VALUES (2, 'AD123', 2, '2021-05-01', '2021-05-30');
+INSERT INTO reservations VALUES (3, 'AD123', 3, '2021-06-01', '2021-06-30');
+INSERT INTO reservations VALUES (4, 'AD123', 4, '2021-07-01', '2021-07-30');
